@@ -2,10 +2,9 @@ server:
   port: 8003
 
 spring:
-  # H2 Database
   datasource:
     driver-class-name: org.h2.Driver
-    url: jdbc:h2:mem:swich
+    url: jdbc:h2:mem:switchwon
     username: sa
     password:
 
@@ -19,7 +18,7 @@ spring:
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
-      ddl-auto: create
+      ddl-auto: none
     properties:
       hibernate:
         dialect: org.hibernate.dialect.H2Dialect
