@@ -19,7 +19,7 @@ public class CashRechargeDetail {
     /**
      * 충전 IDX
      */
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "recharge_idx")
     private BalanceRecharge balanceRecharge;
 

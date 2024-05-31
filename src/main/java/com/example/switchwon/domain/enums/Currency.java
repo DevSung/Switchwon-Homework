@@ -3,13 +3,14 @@ package com.example.switchwon.domain.enums;
 import lombok.Getter;
 
 @Getter
-public enum RechargeType {
-    CARD("CARD"),
-    CASH("CASH");
+public enum Currency {
+    USD("USD"),
+    KRW("KRW");
+
     private final String code;
 
-    RechargeType(String code) {
+    Currency(String code) {
         this.code = code;
     }
-}
 
+}

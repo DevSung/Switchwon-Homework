@@ -2,14 +2,16 @@ package com.example.switchwon.domain.entity;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
 @NoArgsConstructor
 @Table(name = "users")
-public class User extends BaseEntity {
+public class Users extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,4 +30,10 @@ public class User extends BaseEntity {
     @Column(name = "name", length = 50, nullable = false)
     private String name;
 
+    /**
+     * 잔액 정보
+     */
+    @Setter
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
+    private List<AccountBalance> accountBalances;
 }
