@@ -1,5 +1,6 @@
 package com.example.switchwon.domain.entity;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -19,7 +20,7 @@ public class CardRechargeDetail {
     /**
      * 충전 IDX
      */
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "recharge_idx")
     private BalanceRecharge balanceRecharge;
 
@@ -44,7 +45,16 @@ public class CardRechargeDetail {
     /**
      * CVS 번호
      */
-    @Column(name = "cvs", length = 3)
-    private String cvs;
+    @Column(name = "cvv", length = 3)
+    private String cvv;
+
+    @Builder
+    public CardRechargeDetail(BalanceRecharge balanceRecharge, String cardCompany, String cardNumber, String expiryDate, String cvv) {
+        this.balanceRecharge = balanceRecharge;
+        this.cardCompany = cardCompany;
+        this.cardNumber = cardNumber;
+        this.expiryDate = expiryDate;
+        this.cvv = cvv;
+    }
 
 }

@@ -1,8 +1,19 @@
+DROP TABLE IF EXISTS card_recharge_detail;
+DROP TABLE IF EXISTS cash_recharge_detail;
+DROP TABLE IF EXISTS balance_recharge;
+DROP TABLE IF EXISTS account_balance;
+DROP TABLE IF EXISTS payments;
+DROP TABLE IF EXISTS merchant;
+DROP TABLE IF EXISTS currency_code;
+DROP TABLE IF EXISTS users;
+
 CREATE TABLE users
 (
-    idx     BIGINT AUTO_INCREMENT PRIMARY KEY,
-    user_id VARCHAR(50) NOT NULL UNIQUE,
-    name    VARCHAR(50) NOT NULL
+    idx      BIGINT AUTO_INCREMENT PRIMARY KEY,
+    user_id  VARCHAR(50) NOT NULL UNIQUE,
+    name     VARCHAR(50) NOT NULL,
+    reg_date TIMESTAMP,
+    mod_date TIMESTAMP
 );
 
 CREATE TABLE currency_code
@@ -28,7 +39,7 @@ CREATE TABLE payments
     total_amount  DECIMAL(15, 2),
     amount        DECIMAL(15, 2),
     fee           DECIMAL(5, 2),
-    status        VARCHAR(3),
+    status        VARCHAR(10),
     payment_date  TIMESTAMP,
     FOREIGN KEY (user_idx) REFERENCES users (idx)
 );
@@ -48,8 +59,8 @@ CREATE TABLE balance_recharge
     user_idx      BIGINT,
     currency_code VARCHAR(3),
     amount        DECIMAL(15, 2),
-    recharge_type VARCHAR(3),
-    status        VARCHAR(3),
+    recharge_type VARCHAR(5),
+    status        VARCHAR(10),
     recharge_date TIMESTAMP,
     FOREIGN KEY (user_idx) REFERENCES users (idx)
 );
@@ -61,7 +72,7 @@ CREATE TABLE card_recharge_detail
     card_company VARCHAR(20),
     card_number  VARCHAR(20),
     expiry_date  VARCHAR(5),
-    cvs          VARCHAR(3),
+    cvv          VARCHAR(3),
     FOREIGN KEY (recharge_idx) REFERENCES balance_recharge (idx)
 );
 

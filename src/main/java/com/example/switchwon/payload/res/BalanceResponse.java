@@ -1,27 +1,34 @@
 package com.example.switchwon.payload.res;
 
+import com.example.switchwon.domain.entity.AccountBalance;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.math.BigDecimal;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor
 public class BalanceResponse {
 
-    @Schema(name = "유저 pk")
-    private Long userId;
+    @Schema(description = "유저 pk")
+    private Long userIdx;
 
-    @Schema(name = "잔액")
-    private Float balance;
+    @Schema(description = "잔액")
+    private BigDecimal balance;
 
-    @Schema(name = "통화")
+    @Schema(description = "통화")
     private String currency;
 
-    public BalanceResponse(Long userId, Float balance, String currency) {
-        this.userId = userId;
-        this.balance = balance;
-        this.currency = currency;
+    public BalanceResponse(AccountBalance accountBalance) {
+        this.userIdx = accountBalance.getUser().getIdx();
+        this.balance = accountBalance.getBalance();
+        this.currency = accountBalance.getCurrencyCode().getCode();
+    }
+
+    public static List<BalanceResponse> by(List<AccountBalance> accountBalances) {
+        return accountBalances.stream().map(BalanceResponse::new).toList();
     }
 
 }
